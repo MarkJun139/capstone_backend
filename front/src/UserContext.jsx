@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const UserContext = createContext(null);
 
@@ -56,6 +56,10 @@ export const UserProvider = ({ children }) => {
     user: user,
     logout: handleLogout,
   };
+
+  const openCart = async () => {
+    
+  }
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
