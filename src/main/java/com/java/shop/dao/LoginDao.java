@@ -13,7 +13,7 @@ public interface LoginDao {
     @Select("select * from users where uId=#{uId} and uPw=#{uPw}")
     Login login(HashMap<String, Object> map);
 
-    @Insert("insert into users value (#{uCode}, #{uId}, #{uPw}, #{uName}, #{uNick}, #{uEmail}, #{uEmailCheck}, #{uPhone}, #{uAccess}, #{uGrade}, #{uRegiDate}, #{uLastDate}, #{uDrop})")
+    @Insert("insert into users (uCode, uId, uPw, uName, uNick, uEmail, uEmailCheck, uPhone, uAccess, uGrade, uRegiDate, uLastDate, uDrop) value (#{uCode}, #{uId}, #{uPw}, #{uName}, #{uNick}, #{uEmail}, #{uEmailCheck}, #{uPhone}, #{uAccess}, #{uGrade}, #{uRegiDate}, #{uLastDate}, #{uDrop})")
     Login register(HashMap<String, Object> map);
 
     @Select("select count(*) from users where uId=#{id}")

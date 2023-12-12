@@ -47,13 +47,14 @@ function App() {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const response = await fetch('http://localhost:3001/dlogin', {
+        const response = await fetch('/login', {
           method: 'POST',
           credentials: 'include',
         });
-
         if (response.ok) {
+
           const data = await response.json();
+
           if (data.session && data.session.is_logined) {
             const newUser = {
               nickname: data.session.nickname,
@@ -96,7 +97,7 @@ function App() {
 
   const handleLogin = async (uId, uPw) => {
     try {
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,6 +109,7 @@ function App() {
       const responseText = await response.text();
 
       if (response.status === 200) {
+        console.log("테스트");
         const contentType = response.headers.get('Content-Type');
         if (contentType && contentType.includes('application/json')) {
           const data = JSON.parse(responseText);
