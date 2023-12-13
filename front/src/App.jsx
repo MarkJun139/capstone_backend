@@ -103,7 +103,8 @@ function App() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ uId, uPw }),
-        credentials: 'include'
+        credentials: 'include',
+        withCredentials: true
       });
 
       const responseText = await response.text();

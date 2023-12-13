@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.java.shop.dto.Login;
 import com.java.shop.service.LoginService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
@@ -26,15 +28,23 @@ public class LoginController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<Login> login(@RequestBody HashMap<String,Object> map, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody HashMap<String,Object> map) {
             Login login = lsv.login(map);
 
-            session.setAttribute("sid", login.getUId());
+            System.out.println("uId:"+ login.getUId());
+            String sessionId = login.getUId();
+            HttpHeaders header = new HttpHeaders();
 
-            System.out.println(login);
-            System.out.println("session" + (String)session.getAttribute("sid"));
+            if(sessionId != null){
+                header.set("LoginSession", sessionId);
 
-            return ResponseEntity.ok(login);
+                System.out.println(login);
+                System.out.println("session" + sessionId);
+            }
+            
+            return ResponseEntity.ok()                
+                .headers(header)
+                .body(login);
     }
 
     //회원가입
