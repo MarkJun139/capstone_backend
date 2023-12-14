@@ -32,18 +32,8 @@ public class ProductController {
         return null;
     }
 
-    // @GetMapping({"/product"})
-    // public ResponseEntity<?> productAll(@RequestParam(value = "page", defaultValue = "1") int page){
-    //     int end = page*10 - 1;
-    //     int start = end - 9;
-
-    //     HashMap<String, Integer> map = new HashMap<>();
-    //     map.put("start", start);
-    //     map.put("end", end);
-
-    //     List<Product> response = sv.productAll(map);
-    //     return ResponseEntity.ok(response);
-    // }
+    //상품 정보수정
+    //ex:) /product?page=1&category=1&keyword=패딩
     @GetMapping({"/product"})
     public ResponseEntity<?> productsearch(@RequestParam(
         value = "page", defaultValue = "1") int page, @RequestParam(

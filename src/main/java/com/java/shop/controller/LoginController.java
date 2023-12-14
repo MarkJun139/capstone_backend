@@ -59,6 +59,8 @@ public class LoginController {
             return ResponseEntity.ok(login);
     }
 
+    //정보수정
+    //수정할 JSON값을 넘기면됨
     @PostMapping("/edit")
     public ResponseEntity<?> edit(@RequestBody HashMap<String, Object> map) {
         String id = (String)map.get("uId");
