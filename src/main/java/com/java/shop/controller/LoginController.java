@@ -59,6 +59,19 @@ public class LoginController {
             return ResponseEntity.ok(login);
     }
 
+    @PostMapping("/edit")
+    public ResponseEntity<?> edit(@RequestBody HashMap<String, Object> map) {
+        String id = (String)map.get("uId");
+        if(lsv.idCheck(id) == 1){
+            lsv.edit(map);
+            System.out.println(map);
+            return ResponseEntity.ok("true");
+        }
+        else{
+            return ResponseEntity.ok("false");
+        }
+    }
+
     //아이디 중복확인
     @PostMapping("/idcheck")
     public Boolean idCheck(@RequestBody HashMap<String, Object> json) { //리퀘스트 json으로 받을수 있게 해주고

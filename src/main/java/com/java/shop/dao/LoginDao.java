@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.java.shop.dto.Login;
 
@@ -15,6 +16,8 @@ public interface LoginDao {
 
     @Insert("insert into users (uCode, uId, uPw, uName, uNick, uEmail, uEmailCheck, uPhone, uAccess, uGrade, uRegiDate, uLastDate, uDrop) value (#{uCode}, #{uId}, #{uPw}, #{uName}, #{uNick}, #{uEmail}, #{uEmailCheck}, #{uPhone}, #{uAccess}, #{uGrade}, #{uRegiDate}, #{uLastDate}, #{uDrop})")
     Login register(HashMap<String, Object> map);
+
+    int edit(HashMap<String, Object> map);
 
     @Select("select count(*) from users where uId=#{id}")
     int idCheck(String id);

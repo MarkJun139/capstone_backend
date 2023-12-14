@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.shop.dao.LoginDao"> 
+	
+	
+	<update id="edit" parameterType="com.java.shop.dto.Login">
+        update users
+        <set>
+            <if test="uPw != null">uPw = #{uPw},</if>
+            <if test="uNick != null">uNick = #{uNick},</if>
+            <if test="uEmail != null">uEmail = #{uEmail},</if>
+            <if test="uPhone != null">uPhone = #{uPhone},</if>
+        </set>
+        
+        where uId = #{uId}
+	</update>
+
+</mapper> 

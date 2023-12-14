@@ -20,6 +20,10 @@ public class LoginService {
         return dao.register(map);
     }
 
+    public int edit(HashMap<String, Object> map){
+        return dao.edit(map);
+    }
+
     public int idCheck(String id){
         return dao.idCheck(id);
     }
