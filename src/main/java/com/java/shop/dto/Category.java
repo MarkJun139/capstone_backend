@@ -11,5 +11,4 @@ public class Category {
     int cCode;
     String cName1;
     String cName2;
-    Map<String, Object> categoryList = new HashMap<>();
 }

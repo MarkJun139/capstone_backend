@@ -2,6 +2,7 @@ package com.java.shop.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -65,9 +66,33 @@ public class ProductController {
     @GetMapping("/product/categoryset")
     public String productCategorySet(){
         List<Category> list = csv.productCategory();
-        for (Category str : list){
-            System.out.println(str);
+        
+        Map<String, Integer> cloth1 = new HashMap<>();
+        Map<String, Integer> cloth2 = new HashMap<>();
+        Map<String, Integer> cloth3 = new HashMap<>();
+        Map<String, Map<String, Integer>> categoryList = new HashMap<>();
+
+        for(int i = 0; i < list.size(); i++){ 
+            if(list.get(i).getCName1().equals("상의")) {
+                cloth1.put(list.get(i).getCName2(), list.get(i).getCCode());
+            }
+            else if(list.get(i).getCName1().equals("하의")) {
+                cloth2.put(list.get(i).getCName2(), list.get(i).getCCode());
+            }
+            else if(list.get(i).getCName1().equals("아우터")) {
+                cloth3.put(list.get(i).getCName2(), list.get(i).getCCode());
+            }
         }
+        categoryList.put("상의", cloth1);
+        categoryList.put("하의", cloth2);
+        categoryList.put("아우터", cloth3);
+
+        System.out.println(categoryList);
+        System.out.println(categoryList.get("아우터"));
+
+        // for (Category str : list){
+        //     System.out.println(str);
+        // }
         return "null";
     }
     

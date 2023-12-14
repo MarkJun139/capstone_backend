@@ -6,9 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.java.shop.dto.Login;
 import com.java.shop.service.LoginService;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
@@ -29,9 +32,15 @@ public class LoginController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody HashMap<String,Object> map) {
+    public ResponseEntity<?> login(@RequestBody HashMap<String,Object> map, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
             Login login = lsv.login(map);
 
+            HttpSession session = httpServletRequest.getSession();
+            session.setAttribute("user", login);
+
+            Cookie autoCookie = new Cookie("AUTH", login.getUId());
+
+            
             System.out.println("uId:"+ login.getUId());
             String sessionId = login.getUId();
             HttpHeaders header = new HttpHeaders();
@@ -42,12 +51,20 @@ public class LoginController {
                 System.out.println(login);
                 System.out.println("session" + sessionId);
             }
-            
+
             return ResponseEntity.ok()                
                 .headers(header)
                 .body(login);
     }
 
+    @GetMapping("/getuser")
+    public Login getUsers(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        HttpSession session = httpServletRequest.getSession();
+        
+        Login login = (Login) session.getAttribute("uId");
+
+        return login;
+    }
     
 
     //회원가입

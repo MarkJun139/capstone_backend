@@ -14,8 +14,8 @@ public class Login {
     private int uEmailCheck;
     private String uPhone;
     private String uGrade;
-    private String uRegiDate;
-    private String uLastDate;
+    private Date uRegiDate;
+    private Date uLastDate;
     private int uDrop;
 
 

@@ -47,12 +47,12 @@ function App() {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const response = await fetch('/login', {
+        const response = await fetch('/getuser', {
           method: 'POST',
           credentials: 'include',
         });
         if (response.ok) {
-
+          
           const data = await response.json();
 
           if (data.session && data.session.is_logined) {
@@ -111,6 +111,10 @@ function App() {
 
       if (response.status === 200) {
         console.log("테스트");
+        let loginsess = response.headers.get('LoginSession');
+        alert(loginsess);
+        localStorage.setItem('loginsess', loginsess);
+
         const contentType = response.headers.get('Content-Type');
         if (contentType && contentType.includes('application/json')) {
           const data = JSON.parse(responseText);
