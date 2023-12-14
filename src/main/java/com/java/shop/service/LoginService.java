@@ -16,7 +16,7 @@ public class LoginService {
     public Login login(HashMap<String, Object> map){
         return dao.login(map);
     }
-    public Login register(HashMap<String, Object> map){
+    public int register(HashMap<String, Object> map){
         return dao.register(map);
     }
 

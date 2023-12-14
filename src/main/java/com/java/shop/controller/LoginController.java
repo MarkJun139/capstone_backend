@@ -52,25 +52,32 @@ public class LoginController {
 
     //회원가입
     @PostMapping("/register")
-    public ResponseEntity<Login> register(@RequestBody HashMap<String,Object> map) {
+    public Boolean register(@RequestBody HashMap<String,Object> map) {
+        String id = (String)map.get("uId");
+        System.out.println(id);
+        System.out.println(lsv.idCheck(id));
+        if(lsv.idCheck(id) == 0){
             lsv.register(map);
-            Login login = lsv.login(map);
-
-            return ResponseEntity.ok(login);
+            System.out.println(map);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     //정보수정
     //수정할 JSON값을 넘기면됨
     @PostMapping("/edit")
-    public ResponseEntity<?> edit(@RequestBody HashMap<String, Object> map) {
+    public Boolean edit(@RequestBody HashMap<String, Object> map) {
         String id = (String)map.get("uId");
         if(lsv.idCheck(id) == 1){
             lsv.edit(map);
             System.out.println(map);
-            return ResponseEntity.ok("true");
+            return true;
         }
         else{
-            return ResponseEntity.ok("false");
+            return false;
         }
     }
 
