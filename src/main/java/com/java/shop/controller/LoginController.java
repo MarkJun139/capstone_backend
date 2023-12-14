@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +37,8 @@ public class LoginController {
             HttpHeaders header = new HttpHeaders();
 
             if(sessionId != null){
+                // header.setContentType(MediaType.APPLICATION_JSON);
                 header.set("LoginSession", sessionId);
-
                 System.out.println(login);
                 System.out.println("session" + sessionId);
             }
@@ -46,6 +47,8 @@ public class LoginController {
                 .headers(header)
                 .body(login);
     }
+
+    
 
     //회원가입
     @PostMapping("/register")
